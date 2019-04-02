@@ -13,19 +13,19 @@
         android:text="TestOnline"
         android:textAllCaps="false"/>
 
-    <Button
-        android:id="@+id/bt_stopser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_testonline"
-        android:text="Stop Service"
-        android:textAllCaps="false"/>
+    <!--<Button-->
+        <!--android:id="@+id/bt_stopser"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/bt_testonline"-->
+        <!--android:text="Stop Service"-->
+        <!--android:textAllCaps="false"/>-->
     <LinearLayout
         android:id="@+id/layout_forlist"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_stopser"
+        android:layout_below="@+id/bt_testonline"
 
         android:layout_alignParentBottom="true"
 

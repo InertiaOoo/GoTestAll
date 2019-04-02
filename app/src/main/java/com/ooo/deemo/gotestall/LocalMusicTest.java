@@ -34,7 +34,7 @@ public class LocalMusicTest extends AppCompatActivity {
 
     private RecyclerView rv_log;
     private Button bt_testlocal;
-private Button bt_stser;
+//private Button bt_stser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +49,9 @@ private Button bt_stser;
 
         rv_log.setAdapter(rAdapter);
 
-bt_stser = findViewById(R.id.bt_stser);
+//bt_stser = findViewById(R.id.bt_stser);
         bt_testlocal = findViewById(R.id.bt_testlocal);
-
+startLocalTest();
         bt_testlocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +66,34 @@ bt_stser = findViewById(R.id.bt_stser);
             }
         });
 
-        bt_stser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                unbindService(localmusicConnect);
-            }
-        });
+//        bt_stser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                unbindService(localmusicConnect);
+//            }
+//        });
+    }
+
+    private void startLocalTest(){
+        Intent intent_tolocal = getPackageManager().getLaunchIntentForPackage("com.dfzt.newmyplayer");
+        if (intent_tolocal != null) {
+            startActivity(intent_tolocal);
+        } else {
+            // 未安装应用时
+            Toast.makeText(getApplicationContext(), "未安装本地音乐APP", Toast.LENGTH_LONG).show();
+        }
+        startLocalService();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            iPlayerProvider.unRegisterMusicStateListener(iPlayMusicStateListener);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        unbindService(localmusicConnect);
+
     }
 
     //初始化RecycleView内容

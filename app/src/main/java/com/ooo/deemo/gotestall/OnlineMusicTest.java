@@ -33,7 +33,7 @@ public class OnlineMusicTest extends AppCompatActivity {
     private List<Music> musicList = new ArrayList<>();
 
 
-    private static Button bt_stopser;
+//    private static Button bt_stopser;
     private RecyclerView rv_log;
     private Button bt_testonline;
 
@@ -49,8 +49,9 @@ public class OnlineMusicTest extends AppCompatActivity {
         rAdapter = new RecycleAdapter(tl_List);
 
         rv_log.setAdapter(rAdapter);
-        bt_stopser = findViewById(R.id.bt_stopser);
+//        bt_stopser = findViewById(R.id.bt_stopser);
         bt_testonline = findViewById(R.id.bt_testonline);
+        startOnlineService();
         bt_testonline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,21 +67,47 @@ public class OnlineMusicTest extends AppCompatActivity {
             }
         });
 
-        bt_stopser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        bt_stopser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                try {
+//                    iOnlineMusicAidl.unRegisterMusicStateListener(iPlayMusicStateListener);
+//
+//                    iOnlineMusicAidl.unRegisterSearchListener(iSearchMusicCallBack);
+//                } catch (RemoteException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                unbindService(onlinemusicConnect);
+//            }
+//        });
+    }
 
-                try {
-                    iOnlineMusicAidl.unRegisterMusicStateListener(iPlayMusicStateListener);
+    private void startTestOnline(){
+        Intent intent_tolocal = getPackageManager().getLaunchIntentForPackage("com.dfzt.olinemusic");
+        if (intent_tolocal != null) {
+            startActivity(intent_tolocal);
+        } else {
+            // 未安装应用时
+            Toast.makeText(getApplicationContext(), "未安装在线音乐APP", Toast.LENGTH_LONG).show();
+        }
 
-                    iOnlineMusicAidl.unRegisterSearchListener(iSearchMusicCallBack);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
+        startOnlineService();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            iOnlineMusicAidl.unRegisterMusicStateListener(iPlayMusicStateListener);
 
-                unbindService(onlinemusicConnect);
-            }
-        });
+            iOnlineMusicAidl.unRegisterSearchListener(iSearchMusicCallBack);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        unbindService(onlinemusicConnect);
+
     }
 
 
