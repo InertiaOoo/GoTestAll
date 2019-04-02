@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OnlineMusicTest"></activity>
+        <activity android:name=".BlueToothTest"></activity>
+        <activity android:name=".SoundContentTest" />
+        <activity android:name=".OnlineMusicTest" />
         <activity android:name=".LocalMusicTest" />
         <activity android:name=".MainActivity">
             <intent-filter>

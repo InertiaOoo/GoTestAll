@@ -10,7 +10,7 @@
        android:id="@+id/bt_golocal"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="Go Local"
+       android:text="Go LocalMusic"
        android:textAllCaps="false"/>
 
     <Button
@@ -18,8 +18,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bt_golocal"
-        android:text="Go Online"
+        android:text="Go OnlineMusic"
         android:textAllCaps="false"/>
 
+    <Button
+        android:id="@+id/bt_gosound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_goonline"
+        android:text="Go SoundContent"
+        android:textAllCaps="false"/>
 
+    <Button
+        android:id="@+id/bt_goblue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_gosound"
+        android:text="Go BlueTooth"
+        android:textAllCaps="false"/>
 </RelativeLayout>

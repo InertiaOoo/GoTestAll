@@ -50,22 +50,22 @@ public class OnlineMusicTest extends AppCompatActivity {
 
         rv_log.setAdapter(rAdapter);
 //        bt_stopser = findViewById(R.id.bt_stopser);
-        bt_testonline = findViewById(R.id.bt_testonline);
-        startOnlineService();
-        bt_testonline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_tolocal = getPackageManager().getLaunchIntentForPackage("com.dfzt.olinemusic");
-                if (intent_tolocal != null) {
-                    startActivity(intent_tolocal);
-                } else {
-                    // 未安装应用时
-                    Toast.makeText(getApplicationContext(), "未安装在线音乐APP", Toast.LENGTH_LONG).show();
-                }
-
-                startOnlineService();
-            }
-        });
+//        bt_testonline = findViewById(R.id.bt_testonline);
+        startTestOnline();
+//        bt_testonline.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_tolocal = getPackageManager().getLaunchIntentForPackage("com.dfzt.olinemusic");
+//                if (intent_tolocal != null) {
+//                    startActivity(intent_tolocal);
+//                } else {
+//                    // 未安装应用时
+//                    Toast.makeText(getApplicationContext(), "未安装在线音乐APP", Toast.LENGTH_LONG).show();
+//                }
+//
+//                startOnlineService();
+//            }
+//        });
 
 //        bt_stopser.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -222,31 +222,92 @@ public class OnlineMusicTest extends AppCompatActivity {
             int order = 1;          //步骤数
 
             Thread.sleep(MILLIS);
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "播放"));
             iOnlineMusicAidl.play();
-
-
-            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "播放状态"));
-            Toast.makeText(OnlineMusicTest.this, "iOnlineMusicAidl.isPlaying()" + iOnlineMusicAidl.isPlaying(), Toast.LENGTH_SHORT).show();
-            tl_List.add(new TestLog("-after isPlaying:", "" + iOnlineMusicAidl.isPlaying()));
+            tl_List.add(new TestLog("-after play:isPlaying:", "" + iOnlineMusicAidl.isPlaying()));
 //            rAdapter.notifyItemChanged(tl_List.size()-1);
             Thread.sleep(MILLIS);
 
             tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "播放模式"));
             tl_List.add(new TestLog("-after getPlayModel:", "" + iOnlineMusicAidl.getPlayModel()));
-            Toast.makeText(OnlineMusicTest.this, "iOnlineMusicAidl.getPlayModel()" + iOnlineMusicAidl.getPlayModel(), Toast.LENGTH_SHORT).show();
             Thread.sleep(MILLIS);
 
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "下一首"));
             iOnlineMusicAidl.next();
+            tl_List.add(new TestLog("-after next:getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "当前播放"));
+            tl_List.add(new TestLog("-after getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
 
             tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "搜索"));
             iOnlineMusicAidl.searchOnLineMusic("温柔");
-            tl_List.add(new TestLog("-after getPlayModel:", "" + ""));
+            tl_List.add(new TestLog("-after searchOnLineMusic:getCurrentMusic:", ""+iOnlineMusicAidl.getCurrentMusic()));
             Thread.sleep(MILLIS);
 
-
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "播放状态"));
+            tl_List.add(new TestLog("-after isPlaying:", "" + iOnlineMusicAidl.isPlaying()));
             Thread.sleep(MILLIS);
-//            iOnlineMusicAidl.playSearchMusic(musicList.get(0),true);
 
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "当前播放"));
+            tl_List.add(new TestLog("-after getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "总时长"));
+            tl_List.add(new TestLog("-after getDurationTime:", "" + iOnlineMusicAidl.getDurationTime()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "移动seekbar"));
+            int random = (int) (Math.random()*iOnlineMusicAidl.getDurationTime());
+            iOnlineMusicAidl.seekTo(random);
+            tl_List.add(new TestLog("-after seekTo:"+random+"：isPlaying：", "" + iOnlineMusicAidl.isPlaying()));
+            Thread.sleep(5*MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "下一首"));
+            iOnlineMusicAidl.next();
+            tl_List.add(new TestLog("-after next:getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "暂停"));
+            iOnlineMusicAidl.pause();
+            tl_List.add(new TestLog("-after pause:isPlaying:", "" + iOnlineMusicAidl.isPlaying()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "播放或暂停"));
+            iOnlineMusicAidl.doPlayOrPause();
+            tl_List.add(new TestLog("-after doPlayOrPause:isPlaying:", "" + iOnlineMusicAidl.isPlaying()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "列表播放"));
+            iOnlineMusicAidl.setPlayModel(0);
+            tl_List.add(new TestLog("-after setPlayModel(0):getPlayModel:", "" + iOnlineMusicAidl.getPlayModel()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "下一首"));
+            iOnlineMusicAidl.next();
+            tl_List.add(new TestLog("-after next:getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "随机播放"));
+            iOnlineMusicAidl.setPlayModel(1);
+            tl_List.add(new TestLog("-after setPlayModel(1):getPlayModel:", "" + iOnlineMusicAidl.getPlayModel()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "下一首"));
+            iOnlineMusicAidl.next();
+            tl_List.add(new TestLog("-after next:getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "单曲播放"));
+            iOnlineMusicAidl.setPlayModel(2);
+            tl_List.add(new TestLog("-after setPlayModel(2):getPlayModel:", "" + iOnlineMusicAidl.getPlayModel()));
+            Thread.sleep(MILLIS);
+
+            tl_List.add(new TestLog(ONLINEMUSICTAG + order++ + "——", "下一首"));
+            iOnlineMusicAidl.next();
+            tl_List.add(new TestLog("-after next:getCurrentMusic:", "" + iOnlineMusicAidl.getCurrentMusic()));
+            Thread.sleep(MILLIS);
 //
 
             rAdapter.notifyDataSetChanged();

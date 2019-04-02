@@ -33,7 +33,7 @@ public class LocalMusicTest extends AppCompatActivity {
 
 
     private RecyclerView rv_log;
-    private Button bt_testlocal;
+//    private Button bt_testlocal;
 //private Button bt_stser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +50,21 @@ public class LocalMusicTest extends AppCompatActivity {
         rv_log.setAdapter(rAdapter);
 
 //bt_stser = findViewById(R.id.bt_stser);
-        bt_testlocal = findViewById(R.id.bt_testlocal);
+//        bt_testlocal = findViewById(R.id.bt_testlocal);
 startLocalTest();
-        bt_testlocal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_tolocal = getPackageManager().getLaunchIntentForPackage("com.dfzt.newmyplayer");
-                if (intent_tolocal != null) {
-                    startActivity(intent_tolocal);
-                } else {
-                    // 未安装应用时
-                    Toast.makeText(getApplicationContext(), "未安装本地音乐APP", Toast.LENGTH_LONG).show();
-                }
-                startLocalService();
-            }
-        });
+//        bt_testlocal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent_tolocal = getPackageManager().getLaunchIntentForPackage("com.dfzt.newmyplayer");
+//                if (intent_tolocal != null) {
+//                    startActivity(intent_tolocal);
+//                } else {
+//                    // 未安装应用时
+//                    Toast.makeText(getApplicationContext(), "未安装本地音乐APP", Toast.LENGTH_LONG).show();
+//                }
+//                startLocalService();
+//            }
+//        });
 
 //        bt_stser.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -286,7 +286,7 @@ startLocalTest();
             tl_List.add(new TestLog(LOCALMUSICTAG+order+++"——","当前位置getCurrent:"+iPlayerProvider.getCurrent()));
             tl_List.add(new TestLog("getDuration:",""+iPlayerProvider.getDuration()));
             int random = (int)(Math.random()*(iPlayerProvider.getDuration()));
-            iPlayerProvider.setProgress((int)(Math.random()*(iPlayerProvider.getDuration())));
+            iPlayerProvider.setProgress(random);
             Thread.sleep(MILLIS);
             tl_List.add(new TestLog("random number:"+random,":getCurrent:"+iPlayerProvider.getCurrent()));
             Thread.sleep(MILLIS);

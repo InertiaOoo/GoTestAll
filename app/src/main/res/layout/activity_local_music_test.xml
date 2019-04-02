@@ -7,12 +7,12 @@
     tools:context=".LocalMusicTest">
 
 
-    <Button
-        android:id="@+id/bt_testlocal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TestLocal"
-        android:textAllCaps="false"/>
+    <!--<Button-->
+        <!--android:id="@+id/bt_testlocal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="TestLocal"-->
+        <!--android:textAllCaps="false"/>-->
     <!--<Button-->
         <!--android:id="@+id/bt_stser"-->
         <!--android:layout_width="match_parent"-->
@@ -24,8 +24,9 @@
         android:id="@+id/layout_forlist"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_testlocal"
+        android:layout_height="match_parent"
+
+
 
         android:layout_alignParentBottom="true"
 
